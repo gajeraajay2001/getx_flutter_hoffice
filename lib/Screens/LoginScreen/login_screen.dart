@@ -160,7 +160,12 @@ class LoginScreen extends GetWidget<LoginController> {
                           onPressed: () async {
                             if (controller.form.currentState!.validate()) {
                               controller.form.currentState!.save();
-                              Get.toNamed(AppRoutes.homeScreen);
+                              controller.onClickLoginButton(
+                                successCall: _onCreateAuthloginSuccess,
+                                errCall: _onCreateAuthloginError,
+                              );
+
+                              // Get.toNamed(AppRoutes.homeScreen);
                             }
                           },
                           child: Text(
@@ -192,5 +197,16 @@ class LoginScreen extends GetWidget<LoginController> {
         ),
       ),
     ));
+  }
+
+  void _onCreateAuthloginSuccess() {
+    print("YESSsssssssssss........");
+    // controller.sharedPreferences
+    //     .setString("UserName", controller.userNameController.text.toString());
+    Get.offAllNamed(AppRoutes.homeScreen);
+  }
+
+  _onCreateAuthloginError() {
+    print("Eroorrrrrrr........");
   }
 }
